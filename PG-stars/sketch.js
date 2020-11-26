@@ -9,6 +9,9 @@ colors = [
 ];
 let offX = 0;
 let offY = 0;
+//For Mobile
+let xDown = null;
+let yDown = null;
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   generate();
@@ -58,4 +61,44 @@ function keyPressed() {
     offY += 0.5;
   }
   generate();
+}
+//for Mobile
+function touchStarted(evt) {
+  const firstTouch = evt.touches[0];
+  xDown = firstTouch.clientX;
+  yDown = firstTouch.clientY;
+  generate();
+}
+
+function touchMoved(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  let xUp = evt.touches[0].clientX;
+  let yUp = evt.touches[0].clientY;
+  let xDiff = xDown - xUp;
+  let yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (xDiff > 0) {
+      //right
+      offX += 0.5;
+    } else {
+      //left
+      offX -= 0.5;
+    }
+  } else {
+    if (yDiff > 0) {
+      //down
+      offY += 0.5;
+    } else {
+      //up
+      offY -= 0.5;
+    }
+  }
+  xDown = null;
+  yDown = null;
+  generate();
+  return false;
 }
