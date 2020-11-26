@@ -8,30 +8,28 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   generate();
 }
-class Star {
-  constructor(x, y) {
-    let myrng = new Math.seedrandom(`${x + offX}${y + offY}`);
-    let exist = myrng() * 100;
-    exist = exist > 50 ? true : false;
-    if (!exist) return;
-    let isPlant = myrng() * 100;
-    isPlant = isPlant > 10 ? true : false;
-    if (isPlant) {
-      let index = floor(myrng() * plants.length);
-      let plant = plants[index];
-      textSize(32);
-      text(plant.repeat(3), x, y);
-    } else {
-      let index = floor(myrng() * animals.length);
-      let animal = animals[index];
-      textSize(animal.size);
-      for (let i = animal.size; i < 120; i += animal.size)
-        text(
-          animal.img,
-          x + i + myrng() * animal.size,
-          y + myrng() * animal.size
-        );
-    }
+function construct(x, y) {
+  let myrng = new Math.seedrandom(`${x + offX}${y + offY}`);
+  let exist = myrng() * 100;
+  exist = exist > 50 ? true : false;
+  if (!exist) return;
+  let isPlant = myrng() * 100;
+  isPlant = isPlant > 10 ? true : false;
+  if (isPlant) {
+    let index = floor(myrng() * plants.length);
+    let plant = plants[index];
+    textSize(32);
+    text(plant.repeat(3), x, y);
+  } else {
+    let index = floor(myrng() * animals.length);
+    let animal = animals[index];
+    textSize(animal.size);
+    for (let i = animal.size; i < 120; i += animal.size)
+      text(
+        animal.img,
+        x + i + myrng() * animal.size,
+        y + myrng() * animal.size
+      );
   }
 }
 function generate() {
@@ -39,7 +37,7 @@ function generate() {
 
   for (let x = 0; x < width; x += 120) {
     for (let y = 0; y < height; y += 120) {
-      new Star(x, y);
+      construct(x, y);
     }
   }
 }
