@@ -42,9 +42,9 @@ function generate() {
 }
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-    noiseOff -= 1;
+    noiseOff -= 0.1;
   } else if (keyCode === RIGHT_ARROW) {
-    noiseOff += 1;
+    noiseOff += 0.1;
   }
   generate();
 }
