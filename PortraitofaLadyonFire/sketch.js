@@ -6,7 +6,6 @@ class Particle
     this.y=y;
     this.intx= Math.floor(x)
     this.inty =Math.floor(y)
-    this.velocity =random(50)
   }
   draw()
   {
@@ -18,9 +17,6 @@ class Particle
   {
     this.y-=random(10);
     this.inty-=Math.floor(this.y);
-    //console.log(this.speed)
-    this.speed = brightmap[this.intx][this.inty]
-    //console.log(this.intx,this.inty,brightmap[this.intx][this.inty])
     if(this.y<0) this.y=height-1;this.inty=Math.floor(this.y);this.x=random(width);this.intx =Math.floor(this.x);
   }
 }
